@@ -1,0 +1,6 @@
+framework module Pods_DataFetchPractice {
+  umbrella header "Pods-DataFetchPractice-umbrella.h"
+
+  export *
+  module * { export * }
+}

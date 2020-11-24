@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Foundation
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController , viewModelDelegate {
+
+//    MARK: Properties
+    var customerInfo : CustomerInfo?
+    let viewModel = ViewModel()
     
     private let customerListNameLabel : UILabel = {
         let label = UILabel()
@@ -17,6 +21,7 @@ class ViewController: UIViewController {
         label.layer.borderColor = UIColor.systemBlue.cgColor
         label.layer.borderWidth = 1
         label.frame.size = CGSize(width: 150, height: 50)
+        label.textAlignment = .center
         return label
     }()
     
@@ -28,6 +33,7 @@ class ViewController: UIViewController {
        return button
     }()
 
+//    MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,11 +42,21 @@ class ViewController: UIViewController {
         
         customerListNameLabel.center = view.center
         nameButton.frame = CGRect(x: 110, y: 550, width: 200, height: 50)
-    
+        viewModel.delegate = self
+        
     }
-    
+//    MARK: Selector
     @objc func buttonTaped() {
        print("😁😁😁😁")
+        viewModel.fetch()
+
+    }
+
+//    MARK: Func
+    
+    // 이름 업데이트
+    func updateName(name: String) {
+        customerListNameLabel.text = name
     }
 
 }
